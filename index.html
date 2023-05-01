@@ -2,82 +2,57 @@
 <html>
 <head>
 <title>Reloj Digital</title>
-  </head>
-<body>
-<div id=`clock`>
-<div id=`time`>
-<span id=`hours`>00</span> : 
-<span id=`minutes`>00</span> : 
-<span id=`seconds`>00</span>
-</div>
-<div id=`lights`>
-</div>
-</div>
-
+<style>
 #clock {
-background-color: #000;
+font-size: 3em;
 color: #fff;
 text-align: center;
 }
-#lights {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: -1;
-}
-#lights.day {
-background-image: url(daylight.jpg);
-}
-#lights.night {
-background-image: url(starry-night.jpg);
-}
-@keyframes neon {
-0% {
-text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff, 0 0 80px #fff;
-}
-100% {
-text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #ff0, 0 0 80px #ff0, 0 0 160px #ff0, 0 0 320px #ff0;
-}
-}
-#time.neon {
-animation: neon 2s ease-in-out infinite alternate;
-}
+</style>
+</head>
+<body>
+<div id="clock">
+<span id="hours"></span> : 
+<span id="minutes"></span> : 
+<span id="seconds"></span>
+</div>
 
+<script>
 function updateTime() {
-var now = new Date();
-var hours = now.getHours();
-var minutes = now.getMinutes();
-var seconds = now.getSeconds();
+var today = new Date();
+var h = today.getHours();
+var m = today.getMinutes();
+var s = today.getSeconds();
 
-document.getElementById(`hours`).textContent = padZero(hours);
-document.getElementById(`minutes`).textContent = padZero(minutes);
-document.getElementById(`seconds`).textContent = padZero(seconds);
+// Agrega un cero antes de un solo dígito
+m = checkTime(m);
+s = checkTime(s);
 
-var isDay = hours >= 6 && hours < 18;
-var lights = document.getElementById(`lights`);
+// Actualiza la hora en el reloj
+document.getElementById('hours').innerHTML = h;
+document.getElementById('minutes').innerHTML = m;
+document.getElementById('seconds').innerHTML = s;
 
-if (isDay) {
-lights.className = `day`;
+// Cambia el color del fondo del reloj según la hora del día
+if (h >= 19 || h < 6) {
+document.body.style.backgroundColor = `#222`;
+document.getElementById('clock').style.color = `#fff`;
 } else {
-lights.className = `night`;
+document.body.style.backgroundColor = `#fff`;
+document.getElementById('clock').style.color = `#222`;
 }
 
-var time = document.getElementById(`time`);
-
-if (seconds % 2 == 0) {
-time.classList.add(`neon`);
-} else {
-time.classList.remove(`neon`);
-}
+// Actualiza la hora cada segundo
+setTimeout(updateTime, 1000);
 }
 
-function padZero(num) {
-return num < 10 ? `0` + num : num;
+function checkTime(i) {
+if (i < 10) { i = `0` + i };
+return i;
 }
 
+// Inicia el reloj al cargar la página
 updateTime();
-setInterval(updateTime, 1000);
-  </body>
+</script>
+</body>
 </html>
