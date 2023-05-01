@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Reloj Digital</title>
+<style>
+#clock {
+font-size: 3em;
+color: #fff;
+text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="clock">
+<span id="hours"></span> : 
+<span id="minutes"></span> : 
+<span id="seconds"></span>
+</div>
+
+<script>
+function updateTime() {
+var today = new Date();
+var h = today.getHours();
+var m = today.getMinutes();
+var s = today.getSeconds();
+
+// Agrega un cero antes de un solo dígito
+m = checkTime(m);
+s = checkTime(s);
+
+// Actualiza la hora en el reloj
+document.getElementById('hours').innerHTML = h;
+document.getElementById('minutes').innerHTML = m;
+document.getElementById('seconds').innerHTML = s;
+
+// Cambia el color del fondo del reloj según la hora del día
+if (h >= 19 || h < 6) {
+document.body.style.backgroundColor = `#222`;
+document.getElementById('clock').style.color = `#fff`;
+} else {
+document.body.style.backgroundColor = `#fff`;
+document.getElementById('clock').style.color = `#222`;
+}
+
+// Actualiza la hora cada segundo
+setTimeout(updateTime, 1000);
+}
+
+function checkTime(i) {
+if (i < 10) { i = `0` + i };
+return i;
+}
+
+// Inicia el reloj al cargar la página
+updateTime();
+</script>
+</body>
+</html>
