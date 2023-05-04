@@ -34,13 +34,15 @@ document.getElementById('minutes').innerHTML = m;
 document.getElementById('seconds').innerHTML = s;
 
 // Cambia el color del fondo del reloj según la hora del día
-if (h >= 19 || h < 6) {
-document.body.style.backgroundColor = `#10418a`;
+if (h = 0) {
+document.body.style.backgroundColor = `#03002B`;
 document.getElementById('clock').style.color = `#fff`;
-} else {
-document.body.style.backgroundColor = `#61b4d6`;
-document.getElementById('clock').style.color = `#f3c522`;
-}
+} else if (h = 1) {
+document.body.style.backgroundColor = `#03002B`;
+document.getElementById('clock').style.color = `#fff`;
+} else if (h = 2) {
+document.body.style.backgroundColor = `#03002B`;
+document.getElementById('clock').style.color = `#fff`;
 
 // Actualiza la hora cada segundo
 setTimeout(updateTime, 1000);
